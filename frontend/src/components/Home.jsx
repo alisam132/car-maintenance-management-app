@@ -34,25 +34,28 @@ function Home() {
       }
     }
     checkLoggedInUser()
-  }, [])
+  }, [username])
 
   const handleLogout = async () => {
     try{
       const accessToken = localStorage.getItem("accessToken");
-      const refreshToken = localStorage.getItem("refreshToken");
+      const refreshToken = localStorage.getItem("refreshToken");      
 
       if(accessToken && refreshToken) {
         const config = {
           headers: {
             "Authorization":`Bearer ${accessToken}`
           }
-        };
-        await axios.post("http://127.0.0.1:8000/auth/logout/", {"refresh":refreshToken}, config)
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        setLoggedIn(false);
-        setUsername("");
-        navigate("/login/")
+        };        
+        const res = await axios.post("http://127.0.0.1:8000/auth/logout/", {"refresh":refreshToken}, config)
+        if (res){
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          setLoggedIn(false);
+          setUsername("");
+          navigate("/login/")
+        }
+        
       }
     }
     catch(error){
@@ -67,13 +70,23 @@ function Home() {
         {isLoggedIn ? (
         <>
         <h2>Hi, {username}.</h2>
+        <div>
         <Button variant="primary" onClick={() => navigate('/cars/')}>
           My Cars
         </Button>
+        </div>
+        <br />
+        <div>
         <Button variant="primary" onClick={() => navigate('/carsrecords/')}>
           My Cars Maintenance Records
         </Button>
-        <button onClick={handleLogout}>Logout</button>
+        </div>
+        <br />
+        <div>
+        <Button onClick={handleLogout}>Logout</Button>
+
+        </div>
+        
         </>
       ):(
           <h2>If you have an account please Login</h2>

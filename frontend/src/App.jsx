@@ -18,6 +18,7 @@ import './App.css'
 function App() {
   const [cars, setCars] = useState([])
   const [carsRecords, setCarsRecords] = useState([])
+  const [trigger, setTrigger] = useState(false)
   // const navigate = useNavigate;
 
   const handleAddCar = async (formData) => {
@@ -31,6 +32,7 @@ function App() {
           }
           const newCar = await axios.post("http://127.0.0.1:8000/cars/new/", formData, config)
           setCars([newCar.data, ...cars]);
+          setTrigger(!trigger)
         }
     } catch (error) {
       console.error("Error creating car:", error);
@@ -48,6 +50,7 @@ function App() {
           }
           const newCarsRecords = await axios.post("http://127.0.0.1:8000/carsrecords/new/", formData, config)
           setCarsRecords([newCarsRecords.data, ...carsRecords]);
+          setTrigger(!trigger)
         }
     } catch (error) {
       console.error("Error creating cars maintenance record:", error);
@@ -63,8 +66,8 @@ function App() {
         }
       }
       const deleteCarsRecords = await axios.delete(`http://127.0.0.1:8000/carsrecords/delete/${carsRecordsId}`, config)
-      console.log(deleteCarsRecords)
       setCarsRecords(carsRecords.filter((carRec) => carRec.id !== deleteCarsRecords.id));
+      setTrigger(!trigger)
     }
   };
 
@@ -78,6 +81,7 @@ function App() {
       }
       const deleteCar = await axios.delete(`http://127.0.0.1:8000/cars/delete/${carId}`, config)
       setCars(cars.filter((car) => car.id !== deleteCar.id));
+      setTrigger(!trigger)
       // navigate(`/cars/`);
     }
     
@@ -114,6 +118,7 @@ function App() {
           }
           const updatedCarsRecords = await axios.put(`http://127.0.0.1:8000/carsrecords/update/${carsRecordsId}`, formData, config)          
           setCarsRecords(carsRecords.map((CarsRecord) => (CarsRecord.id === updatedCarsRecords.id ? updatedCarsRecords : CarsRecord)));
+          setTrigger(!trigger)
         }
         // return <Navigate to={`/cars/${carId}`}/>
       // navigateTo(`/cars/${carId}`);
@@ -143,7 +148,8 @@ function App() {
           }
           
           const response = await axios.get("http://127.0.0.1:8000/cars/", config)
-          if (response) {setCars(response.data);}  
+          if (response) {setCars(response.data);}
+          
         }
         else{
           setCars([])
@@ -161,7 +167,8 @@ function App() {
         }
         const response = await axios.get("http://127.0.0.1:8000/carsrecords/", config)
         
-        if (response) setCarsRecords(response.data)
+        
+        if (response) {setCarsRecords(response.data);}
       }
       else{
         setCarsRecords([])
@@ -169,7 +176,7 @@ function App() {
   };
    fetchAllCars()
    fetchAllCarmaintenance()  
-  }, []);
+  },[trigger]);
   
 
   return (

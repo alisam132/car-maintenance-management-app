@@ -1,23 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 function CarList(props) {
   return (
     <main>
-        <button><Link to='/cars/new'>Add Car</Link></button>
-        <button><Link to='/'>Back Home</Link></button>
-        <h1>Cars</h1>
         <div>
+        <button><Link to='/cars/new'>Add Car</Link></button>
+        </div>
+        
+        <br />
+        <div>
+            <button><Link to='/'>Back Home</Link></button>
+
+        </div>
+        
+        <h1>Cars</h1>
+        <ListGroup>
             {props.cars.map((car) => (
             <button>
                 <Link key={car.id} to={`/cars/${car.id}`}>
-                    <article>
+                    <ListGroup.Item>
                         <h2>{car.car_make} - {car.car_model}</h2>
-                    </article>
+                    </ListGroup.Item>
                 </Link>
             </button>
             ))}
-        </div>
+        </ListGroup>
     </main>
   )
 }

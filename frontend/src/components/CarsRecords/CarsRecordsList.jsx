@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 function CarRecordsList(props) {
   return (
@@ -7,17 +9,17 @@ function CarRecordsList(props) {
         <button><Link to='/'>Back Home</Link></button>
         <button><Link to='/carsrecords/new'>Add Car Maintenance Record</Link></button>
         <h1>Car Maintenance</h1>
-        <div>
+        <ListGroup>
             {props.carsRecords.map((cardRecord) => (
             <button>
                 <Link key={cardRecord.id} to={`/carsrecords/${cardRecord.id}`}>
-                    <article>
+                <ListGroup.Item>
                         <h2>{cardRecord.record_name} - {cardRecord.shop_name}</h2>
-                    </article>
+                </ListGroup.Item>
                 </Link>
             </button>
             ))}
-        </div>
+        </ListGroup>
     </main>
   )
 }
