@@ -3,7 +3,7 @@
 This is a web-based application designed to keep track of all your vehicles and their maintenance, while also helping you monitor expenses.
 ## Getting Started
 ### Links:
-- **Deployed App**: [Visit the deployed app](https://car-maintenance-backend-cefb13b79607.herokuapp.com/auth/login/)
+- **Deployed App**: [Visit the deployed app](https://car-maintenance-frontend.vercel.app/auth/login)
 - **Project Planning (Trello)**: [Project Planning on Trello](https://trello.com/b/czCmIUFS/car-maintenance-management-app)
 - **Backend Repository**: [Backend Repository on GitHub](https://github.com/alisam132/car-maintenance-management-app)
 - **Frontend Repository**: [Frontend Repository on GitHub](https://github.com/alisam132/car-maintenance-management-app)
