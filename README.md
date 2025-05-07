@@ -62,7 +62,7 @@ This is a web-based application designed to keep track of all your vehicles and 
 ## Technologies Used
 - **React**: Frontend framework.
 - **Django**: Backend framework.
-- **Postgres**: Database for storing user and insurance policy data.
+- **Postgres**: Database for storing user, Cars and it's records data.
 - **simple-JWT**: Authentication via JSON Web Tokens.
 - **Axios**: For making HTTP requests.
 - **Bcrypt**: For password hashing.
